@@ -1,24 +1,18 @@
-import logo from './logo.svg';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import './App.css';
+import ListStudentComponent from "./component/ListStudentComponent";
+import ViewStudentComponent from "./component/ViewStudentComponent";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div>
+        <Router>
+            <Routes>
+            <Route path = {"/students"} exact element={<ListStudentComponent/>}></Route>
+            <Route path = {"/students/detail/:id"} element={<ViewStudentComponent/>}></Route>
+            </Routes>
+        </Router>
+      </div>
   );
 }
 
