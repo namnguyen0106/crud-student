@@ -1,21 +1,25 @@
-import {Field, Form, Formik} from "formik";
+import {useNavigate, useParams} from "react-router-dom";
 import StudentService from "../service/StudentService";
-import {useNavigate} from "react-router-dom";
+import {Field, Form, Formik} from "formik";
+import GetStudentById from "../service/GetStudentById";
 
-export default function CreateStudentComponent() {
-    const navigate = new useNavigate()
+export default function UpdateStudentComponent() {
+    const param = useParams();
+    const navigate = useNavigate();
+    const [student] = GetStudentById(param)
     return (
         <Formik
+            enableReinitialize={true}
             initialValues={{
-                id: '',
-                name: '',
-                description: '',
-                action: ''
+                id: student.id,
+                name: student.name,
+                description: student.description,
+                action: student.action
             }}
             onSubmit={(values) => {
-                StudentService.createStudent(values)
+                StudentService.updateStudentById(student.id, values)
                     .then(() => {
-                        alert("Create Success")
+                        alert("Update Success")
                         return navigate("/students")
                     })
             }}
@@ -30,18 +34,23 @@ export default function CreateStudentComponent() {
                                 <Form>
                                     <div className="form-group">
                                         <label> Name: </label>
-                                        <Field name={'name'} placeholder="name" className="form-control"></Field>
+                                        <Field name={'name'} placeholder="name"
+                                               className="form-control">
+                                        </Field>
                                     </div>
                                     <div className="form-group">
                                         <label> Description: </label>
                                         <Field name={'description'} placeholder="description"
-                                               className="form-control"></Field>
+                                               className="form-control" >
+                                        </Field>
                                     </div>
                                     <div className="form-group">
                                         <label> Action: </label>
-                                        <Field name={'action'} placeholder="action" className="form-control"></Field>
+                                        <Field name={'action'} placeholder="action"
+                                               className="form-control" >
+                                        </Field>
                                     </div>
-                                    <button className="btn btn-success">Save</button>
+                                    <button className="btn btn-success">Update</button>
                                 </Form>
                             </div>
                         </div>

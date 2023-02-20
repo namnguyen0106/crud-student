@@ -1,7 +1,6 @@
 import StudentService from '../service/StudentService'
 import {useEffect, useState} from "react";
-import ViewStudentComponent from "./ViewStudentComponent";
-import {redirect, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 export default function ListStudentComponent() {
     const [students, setStudents] = useState([]);
@@ -16,6 +15,9 @@ export default function ListStudentComponent() {
     }
     const studentDetail = (id) => {
         return navigate('/students/detail/' + id);
+    }
+    const updateStudent = (id) => {
+        return navigate('/students/update/' + id);
     }
     return (
         <div>
@@ -44,9 +46,9 @@ export default function ListStudentComponent() {
                                     <td> {student.description}</td>
                                     <td> {student.action}</td>
                                     <td>
-                                        {/*<button onClick={() => this.editStudent(student.id)}*/}
-                                        {/*        className="btn btn-info">Update*/}
-                                        {/*</button>*/}
+                                        <button onClick={() => updateStudent(student.id)}
+                                                className="btn btn-info">Update
+                                        </button>
                                         {/*<button style={{marginLeft: "10px"}}*/}
                                         {/*        onClick={() => this.deleteStudent(student.id)}*/}
                                         {/*        className="btn btn-danger">Delete*/}

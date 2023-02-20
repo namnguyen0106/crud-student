@@ -1,23 +1,11 @@
 import StudentService from '../service/StudentService'
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import GetStudentById from "../service/GetStudentById";
 
 export default function ViewStudentComponent() {
-    const [student, setStudent] = useState({
-        id: "",
-        name: "",
-        description: "",
-        action: ""
-    });
     const param = useParams();
-    useEffect(() => {
-        const setDataForStudent = async () => {
-            StudentService.getStudentById(param.id).then(res => {
-                setStudent(res.data);
-            })
-        }
-        setDataForStudent().catch(console.error);
-    }, [])
+    const [student] = GetStudentById(param)
 
     return (
         <div>
