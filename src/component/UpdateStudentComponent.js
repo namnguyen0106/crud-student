@@ -1,7 +1,7 @@
 import {useNavigate, useParams} from "react-router-dom";
 import StudentService from "../service/StudentService";
 import {Field, Form, Formik} from "formik";
-import GetStudentById from "../service/GetStudentById";
+import GetStudentById from "../common/GetStudentById";
 
 export default function UpdateStudentComponent() {
     const param = useParams();

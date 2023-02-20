@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import StudentService from "./StudentService";
+import StudentService from "../service/StudentService";
 
 export default function GetStudentById(param) {
     const [student, setStudent] = useState({

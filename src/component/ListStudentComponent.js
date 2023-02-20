@@ -1,6 +1,7 @@
 import StudentService from '../service/StudentService'
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {Button} from "react-bootstrap";
 
 export default function ListStudentComponent() {
     const [students, setStudents] = useState([]);
@@ -19,11 +20,22 @@ export default function ListStudentComponent() {
     const updateStudent = (id) => {
         return navigate('/students/update/' + id);
     }
+    const deleteStudent = (id) => {
+        let isDel = window.confirm("Have you thought about it?");
+        if (isDel) {
+            StudentService.deleteStudentById(id).then(() => {
+                alert("Delete Success")
+                StudentService.getStudents().then(response => {
+                    setStudents(response.data)
+                })
+            });
+        }
+    }
     return (
         <div>
             <h2 className="text-center">Students List</h2>
             <div className="row">
-                <button className="btn btn-primary" onClick={addStudent}> Add student</button>
+                <Button variant="primary" onClick={addStudent}>Add student</Button>{''}
             </div>
             <br></br>
             <div className="row">
@@ -49,10 +61,10 @@ export default function ListStudentComponent() {
                                         <button onClick={() => updateStudent(student.id)}
                                                 className="btn btn-info">Update
                                         </button>
-                                        {/*<button style={{marginLeft: "10px"}}*/}
-                                        {/*        onClick={() => this.deleteStudent(student.id)}*/}
-                                        {/*        className="btn btn-danger">Delete*/}
-                                        {/*</button>*/}
+                                        <button style={{marginLeft: "10px"}}
+                                                onClick={() => deleteStudent(student.id)}
+                                                className="btn btn-danger">Delete
+                                        </button>
                                         <button style={{marginLeft: "10px"}}
                                                 onClick={() => studentDetail(student.id)}
                                                 className="btn btn-info">View

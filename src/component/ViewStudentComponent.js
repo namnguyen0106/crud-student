@@ -1,7 +1,7 @@
 import StudentService from '../service/StudentService'
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import GetStudentById from "../service/GetStudentById";
+import GetStudentById from "../common/GetStudentById";
 
 export default function ViewStudentComponent() {
     const param = useParams();
